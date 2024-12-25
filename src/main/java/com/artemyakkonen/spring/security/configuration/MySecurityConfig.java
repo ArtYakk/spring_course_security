@@ -2,6 +2,8 @@ package com.artemyakkonen.spring.security.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,10 +15,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 @Configuration
+@Order(2)
 public class MySecurityConfig{
 
 @Bean
-    public UserDetailsService userDetailsService()  {
+public UserDetailsService userDetailsService()  {
    UserBuilder users = User.withDefaultPasswordEncoder();
 
         UserDetails user1 = users
