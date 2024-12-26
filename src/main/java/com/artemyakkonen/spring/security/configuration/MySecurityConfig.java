@@ -15,7 +15,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @EnableWebSecurity
 @Configuration
-@Order(2)
 public class MySecurityConfig{
 
 @Bean

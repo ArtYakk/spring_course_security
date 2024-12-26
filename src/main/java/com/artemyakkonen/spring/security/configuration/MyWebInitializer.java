@@ -3,7 +3,7 @@ package com.artemyakkonen.spring.security.configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-@Order(4)
+
 public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

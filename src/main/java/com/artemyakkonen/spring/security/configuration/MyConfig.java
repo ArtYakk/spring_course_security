@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages = "com.artemyakkonen.spring.security")
 @EnableWebMvc
-@Order(1)
 public class MyConfig {
 
     @Bean
