@@ -1,5 +1,6 @@
 package com.artemyakkonen.spring.security.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -14,12 +15,18 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 @EnableWebSecurity
 @Configuration
 public class MySecurityConfig{
+
+    @Autowired
+    DataSource dataSource;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,26 +43,8 @@ public class MySecurityConfig{
 
 
     @Bean
-    public UserDetailsService userDetailsService()  {
-        UserBuilder users = User.withDefaultPasswordEncoder();
-
-        UserDetails user1 = users
-                .username("zaur")
-                .password("zaur")
-                .roles("EMPLOYEE")
-                .build();
-        UserDetails user2 = users
-                .username("elena")
-                .password("elena")
-                .roles("HR")
-                .build();
-        UserDetails user3 = users
-                .username("ivan")
-                .password("ivan")
-                .roles("MANAGER", "HR")
-                .build();
-
-        return new InMemoryUserDetailsManager(user1, user2, user3);
+    public UserDetailsService userDetailsService(DataSource dataSource)  {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
 
